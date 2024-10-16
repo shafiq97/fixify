@@ -16,51 +16,31 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fixify.Data.PaintingService;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.fixify.CategoryAdapter.OnCategoryClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseFirestore db;
-    private RecyclerView recyclerView;
-    private PaintingServiceAdapter serviceAdapter;
-    private List<PaintingService> serviceList;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private FirebaseAuth firebaseAuth;
 
-    private GoogleSignInClient googleSignInClient;
-
+    private RecyclerView categoryRecyclerView;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Sign out the user when the app runs
-        signOut();
 
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -86,32 +66,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Update the login/logout menu item based on user's login status
         updateLoginLogoutMenuItem();
 
-        // Initialize Firestore
-        db = FirebaseFirestore.getInstance();
+        // Set up RecyclerView for categories
+        List<String> categories = Arrays.asList("Painting Service", "Plumbing Service", "Electrical Service", "Delivery Service");
+        categoryRecyclerView = findViewById(R.id.recyclerView);
+        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize RecyclerView and Adapter
-        recyclerView = findViewById(R.id.recyclerView);
-        serviceList = new ArrayList<>();
-        serviceAdapter = new PaintingServiceAdapter(serviceList, this);
-        recyclerView.setAdapter(serviceAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        categoryAdapter = new CategoryAdapter(categories, this, category -> {
+            // Handle category click and navigate to a new activity with selected category
+            Intent intent = new Intent(MainActivity.this, CategoryServiceActivity.class);
+            intent.putExtra("selectedCategory", category);
+            startActivity(intent);
+        });
 
-        // Fetch services from Firestore
-        fetchServicesFromFirestore();
+        categoryRecyclerView.setAdapter(categoryAdapter);
 
         // Initialize BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this::handleBottomNavigationItemSelected);
-    }
-
-    private void signOut() {
-        googleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                // User is now signed out
-//                Toast.makeText(MainActivity.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -130,12 +101,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             Log.d("NavigationDrawer", "Home clicked");
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
         } else if (id == R.id.nav_profile) {
             Log.d("NavigationDrawer", "Profile clicked");
-            Intent intent = new Intent(MainActivity.this, EditProfileActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
         } else if (id == R.id.nav_login_logout) {
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
             if (currentUser != null) {
@@ -145,23 +114,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 updateLoginLogoutMenuItem(); // Update menu item after logout
             } else {
                 // User is not logged in, go to login activity
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
-        } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_policy) {
-            Intent intent = new Intent(MainActivity.this, PrivacyActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_waiting) {
-            Intent intent = new Intent(MainActivity.this, WaitingActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_active) {
-            Intent intent = new Intent(MainActivity.this, ActiveActivity.class);
-            startActivity(intent);
         }
-
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -173,10 +128,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
-            // User is logged in, show "Logout"
             loginLogoutMenuItem.setTitle("Logout");
         } else {
-            // User is not logged in, show "Login"
             loginLogoutMenuItem.setTitle("Login");
         }
     }
@@ -186,51 +139,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Log.d("BottomNavigation", "Home clicked");
-            Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.nav_chatbot) {
-            Log.d("BottomNavigation", "Chat clicked");
-            Toast.makeText(this, "Chat clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, ChatBot.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.nav_noti) {
-            Log.d("BottomNavigation", "Notifications clicked");
-            Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, NotiActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
             return true;
         } else if (id == R.id.nav_profile) {
-            Log.d("BottomNavigation", "Profile clicked");
-            Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, EditProfileActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
             return true;
-        } else {
-            return false;
         }
-    }
-
-    private void fetchServicesFromFirestore() {
-        db.collection("services")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        serviceList.clear();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            PaintingService service = document.toObject(PaintingService.class);
-                            serviceList.add(service);
-                        }
-                        serviceAdapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Failed to load services", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(MainActivity.this, "Error fetching services: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+        return false;
     }
 }
