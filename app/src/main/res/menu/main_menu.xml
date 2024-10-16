@@ -46,4 +46,19 @@
             </group>
         </menu>
     </item>
+
+    <item android:title="Booking">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_waiting"
+                    android:icon="@drawable/ic_share"
+                    android:title="Waiting" />
+                <item
+                    android:id="@+id/nav_active"
+                    android:icon="@drawable/ic_rate"
+                    android:title="Active" />
+            </group>
+        </menu>
+    </item>
 </menu>

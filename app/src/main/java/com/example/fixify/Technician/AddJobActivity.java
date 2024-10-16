@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fixify.Data.PaintingService;
+import com.example.fixify.LoginActivity;
+import com.example.fixify.MainActivity;
 import com.example.fixify.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -134,7 +136,9 @@ public class AddJobActivity extends AppCompatActivity {
                 .add(newService)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(AddJobActivity.this, "Job added successfully", Toast.LENGTH_SHORT).show();
-                    finish(); // Close the activity and return to previous screen
+//                    finish(); // Close the activity and return to previous screen
+                    Intent intent = new Intent(AddJobActivity.this, TechnicianHomeActivity.class);
+                    startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(AddJobActivity.this, "Failed to add job", Toast.LENGTH_SHORT).show();
