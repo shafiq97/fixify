@@ -27,7 +27,7 @@ public class TechnicianHomeActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private RecyclerView servicesRecyclerView;
-    private PaintingServiceAdapter serviceAdapter;
+    private TechnicianPaintingServiceAdapter serviceAdapter;
     private List<PaintingService> serviceList;
 
     @Override
@@ -40,7 +40,7 @@ public class TechnicianHomeActivity extends AppCompatActivity {
 
         // Initialize service list and adapter
         serviceList = new ArrayList<>();
-        serviceAdapter = new PaintingServiceAdapter(serviceList, this);
+        serviceAdapter = new TechnicianPaintingServiceAdapter(serviceList, this);
 
         // Set up RecyclerView
         servicesRecyclerView = findViewById(R.id.jobsRecyclerView); // Use the correct ID for the RecyclerView
