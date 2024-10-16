@@ -1,5 +1,6 @@
 package com.example.fixify;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,15 @@ import java.util.List;
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
 
     private List<Booking> bookingList;
+    private OnBookingStatusUpdateListener listener; // Listener for status update
 
-    public BookingAdapter(List<Booking> bookingList) {
+    public interface OnBookingStatusUpdateListener {
+        void onBookingStatusUpdate(Booking booking); // Define callback
+    }
+
+    public BookingAdapter(List<Booking> bookingList, OnBookingStatusUpdateListener listener) {
         this.bookingList = bookingList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,6 +41,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         holder.serviceTitleTextView.setText(booking.getServiceTitle());
         holder.preferredDateTextView.setText(booking.getPreferredDate());
         holder.preferredTimeTextView.setText(booking.getPreferredTime());
+
+        // Set card click listener
+        holder.bookingCard.setOnClickListener(v -> {
+            listener.onBookingStatusUpdate(booking); // Trigger callback when card is clicked
+        });
     }
 
     @Override

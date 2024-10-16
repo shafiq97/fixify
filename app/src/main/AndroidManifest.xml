@@ -130,6 +130,12 @@
             android:name=".CategoryServiceActivity"
             android:exported="false" />
         <activity
+            android:name=".Technician.TechnicianDetailServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Technician.TechnicianBookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"> <!-- SelectionActivity set as Launcher -->
             <intent-filter>

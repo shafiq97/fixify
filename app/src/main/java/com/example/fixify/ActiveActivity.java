@@ -1,6 +1,5 @@
 package com.example.fixify;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -34,7 +33,7 @@ public class ActiveActivity extends AppCompatActivity {
         // Initialize RecyclerView and adapter
         recyclerView = findViewById(R.id.recyclerView);
         bookingList = new ArrayList<>();
-        bookingAdapter = new BookingAdapter(bookingList);
+        bookingAdapter = new BookingAdapter(bookingList, null); // Since we are not updating status here, we can pass null for the listener
         recyclerView.setAdapter(bookingAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,12 +52,14 @@ public class ActiveActivity extends AppCompatActivity {
                         if (!querySnapshot.isEmpty()) {
                             bookingList.clear();  // Clear the list to avoid duplication
                             for (QueryDocumentSnapshot document : querySnapshot) {
+                                String bookingId = document.getId();
                                 String serviceTitle = document.getString("serviceTitle");
                                 String preferredDate = document.getString("preferredDate");
                                 String preferredTime = document.getString("preferredTime");
+                                String status = document.getString("status");
 
                                 // Create Booking object
-                                Booking booking = new Booking(serviceTitle, preferredDate, preferredTime);
+                                Booking booking = new Booking(bookingId, serviceTitle, preferredDate, preferredTime, status);
                                 bookingList.add(booking);  // Add booking to the list
                             }
 

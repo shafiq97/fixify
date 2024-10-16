@@ -1,6 +1,5 @@
 package com.example.fixify;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -34,41 +33,47 @@ public class WaitingActivity extends AppCompatActivity {
         // Initialize RecyclerView and adapter
         recyclerView = findViewById(R.id.recyclerView);
         bookingList = new ArrayList<>();
-        bookingAdapter = new BookingAdapter(bookingList);
+        bookingAdapter = new BookingAdapter(bookingList, null); // Passing null for listener since no status update here
         recyclerView.setAdapter(bookingAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Load booking details from Firestore
+        // Load waiting bookings from Firestore
         loadBookings();
     }
 
     private void loadBookings() {
-        // Fetch the bookings from Firestore
-        db.collection("bookings").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                QuerySnapshot querySnapshot = task.getResult();
-                if (!querySnapshot.isEmpty()) {
-                    bookingList.clear();  // Clear the list to avoid duplication
-                    for (QueryDocumentSnapshot document : querySnapshot) {
-                        String serviceTitle = document.getString("serviceTitle");
-                        String preferredDate = document.getString("preferredDate");
-                        String preferredTime = document.getString("preferredTime");
+        // Fetch the bookings with 'Waiting' status from Firestore
+        db.collection("bookings")
+                .whereEqualTo("status", "Waiting")  // Filter only bookings with status "Waiting"
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        if (!querySnapshot.isEmpty()) {
+                            bookingList.clear();  // Clear the list to avoid duplication
+                            for (QueryDocumentSnapshot document : querySnapshot) {
+                                String bookingId = document.getId();
+                                String serviceTitle = document.getString("serviceTitle");
+                                String preferredDate = document.getString("preferredDate");
+                                String preferredTime = document.getString("preferredTime");
+                                String status = document.getString("status");
 
-                        // Create Booking object
-                        Booking booking = new Booking(serviceTitle, preferredDate, preferredTime);
-                        bookingList.add(booking);  // Add booking to the list
+                                // Create Booking object with updated constructor
+                                Booking booking = new Booking(bookingId, serviceTitle, preferredDate, preferredTime, status);
+                                bookingList.add(booking);  // Add booking to the list
+                            }
+
+                            // Notify adapter about data changes
+                            bookingAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(WaitingActivity.this, "No bookings found.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(WaitingActivity.this, "Failed to load bookings.", Toast.LENGTH_SHORT).show();
                     }
-
-                    // Notify adapter about data changes
-                    bookingAdapter.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(WaitingActivity.this, "No bookings found.", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(WaitingActivity.this, "Failed to load bookings.", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(WaitingActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(WaitingActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
