@@ -29,9 +29,7 @@
         <activity
             android:name=".Technician.TechnicianProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".Technician.TechnicianProdileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Technician.TechnicianCompletedActivity"
             android:exported="false" />
@@ -121,6 +119,9 @@
             android:exported="false" />
         <activity
             android:name=".TimeSlot"
+            android:exported="false" />
+        <activity
+            android:name=".Technician.AddJobActivity"
             android:exported="false" />
         <activity
             android:name=".Service"

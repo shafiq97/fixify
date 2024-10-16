@@ -1,5 +1,6 @@
 package com.example.fixify.Technician;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -39,7 +40,7 @@ public class TechnicianHomeActivity extends AppCompatActivity {
 
         // Initialize service list and adapter
         serviceList = new ArrayList<>();
-        serviceAdapter = new PaintingServiceAdapter(serviceList,this);
+        serviceAdapter = new PaintingServiceAdapter(serviceList, this);
 
         // Set up RecyclerView
         servicesRecyclerView = findViewById(R.id.jobsRecyclerView); // Use the correct ID for the RecyclerView
@@ -51,7 +52,12 @@ public class TechnicianHomeActivity extends AppCompatActivity {
 
         // Handle the "Add New Job" button click
         ImageView addJobButton = findViewById(R.id.tambah);
-        addJobButton.setOnClickListener(v -> showAddJobDialog());
+// Remove the showAddJobDialog() method and update the button click handler
+
+        addJobButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TechnicianHomeActivity.this, AddJobActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void fetchServicesFromFirestore() {
@@ -133,7 +139,6 @@ public class TechnicianHomeActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 
 }
