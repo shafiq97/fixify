@@ -2,21 +2,25 @@ package com.example.fixify;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
+import com.example.fixify.Data.Booking;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActiveActivity extends AppCompatActivity {
 
-    private MaterialCardView waitingCard, activeCard, completedCard;
-    private TextView activeTextView;
-
+    private RecyclerView recyclerView;
+    private BookingAdapter bookingAdapter;
+    private List<Booking> bookingList;
     private FirebaseFirestore db;
 
     @Override
@@ -24,56 +28,50 @@ public class ActiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
 
-        // Initialize Firebase Firestore
+        // Initialize Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Initialize UI components
-        waitingCard = findViewById(R.id.waiting);
-        activeCard = findViewById(R.id.active);
-        completedCard = findViewById(R.id.completed);
-        activeTextView = findViewById(R.id.myProfile); // Assuming this is the TextView for active booking details
+        // Initialize RecyclerView and adapter
+        recyclerView = findViewById(R.id.recyclerView);
+        bookingList = new ArrayList<>();
+        bookingAdapter = new BookingAdapter(bookingList);
+        recyclerView.setAdapter(bookingAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Load active booking details from Firestore
+        // Load active bookings from Firestore
         loadActiveBookings();
-
-        // Set click listeners for cards
-        waitingCard.setOnClickListener(v -> {
-            Intent intent = new Intent(ActiveActivity.this, WaitingActivity.class);
-            startActivity(intent);
-        });
-
-        completedCard.setOnClickListener(v -> {
-            Intent intent = new Intent(ActiveActivity.this, CompleteActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void loadActiveBookings() {
         // Fetch the bookings with active status from Firestore
-        db.collection("bookings").whereEqualTo("status", "Active")  // Fetch only bookings with "active" status
-                .get().addOnCompleteListener(task -> {
+        db.collection("bookings")
+                .whereEqualTo("status", "Active")  // Filter only active bookings
+                .get()
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         QuerySnapshot querySnapshot = task.getResult();
                         if (!querySnapshot.isEmpty()) {
-                            StringBuilder bookingsText = new StringBuilder();  // Use a StringBuilder to append text
+                            bookingList.clear();  // Clear the list to avoid duplication
                             for (QueryDocumentSnapshot document : querySnapshot) {
                                 String serviceTitle = document.getString("serviceTitle");
                                 String preferredDate = document.getString("preferredDate");
                                 String preferredTime = document.getString("preferredTime");
 
-                                // Append each booking's information
-                                bookingsText.append("Service: ").append(serviceTitle).append("\n").append("Preferred Date: ").append(preferredDate).append("\n").append("Preferred Time: ").append(preferredTime).append("\n\n");
+                                // Create Booking object
+                                Booking booking = new Booking(serviceTitle, preferredDate, preferredTime);
+                                bookingList.add(booking);  // Add booking to the list
                             }
 
-                            // Display all the active bookings at once
-                            activeTextView.setText(bookingsText.toString());
+                            // Notify adapter about data changes
+                            bookingAdapter.notifyDataSetChanged();
                         } else {
-                            activeTextView.setText("No active bookings found.");
+                            Toast.makeText(ActiveActivity.this, "No active bookings found.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(ActiveActivity.this, "Failed to load active bookings", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActiveActivity.this, "Failed to load active bookings.", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(e -> {
+                })
+                .addOnFailureListener(e -> {
                     Toast.makeText(ActiveActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
