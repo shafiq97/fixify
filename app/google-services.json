@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1036444010071",
+    "project_id": "fixify-722c6",
+    "storage_bucket": "fixify-722c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036444010071:android:b1035e13f21e0880b84512",
+        "android_client_info": {
+          "package_name": "com.example.fixify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036444010071-s5gslla8nji2f5qvl5cev54gu7q31abl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fixify",
+            "certificate_hash": "32d251137d599914f43ce3b64bf9e27f6812fbd8"
+          }
+        },
+        {
+          "client_id": "1036444010071-ogat1fh5dight24amsovol8i35n8jk4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT_4nXhFMDY0UOxLzbH9MEnPWBlLUzcCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036444010071-ogat1fh5dight24amsovol8i35n8jk4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

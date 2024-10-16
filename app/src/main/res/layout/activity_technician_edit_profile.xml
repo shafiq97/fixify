@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_back"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:layout_marginStart="105dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <!-- Profile Picture inside CardView for rounded shape -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:radius="50dp">
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profile"
+                android:contentDescription="Profile Picture"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Change Photo -->
+        <TextView
+            android:id="@+id/change_photo"
+            android:layout_width="115dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="5dp"
+            android:text="Change photo"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="15sp" />
+
+        <!-- Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your name"
+            android:backgroundTint="@android:color/darker_gray"
+            android:padding="10dp"
+            android:textSize="16sp"/>
+
+        <!-- IC Number -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IC Number"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start"/>
+
+        <EditText
+            android:id="@+id/ic_number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your IC number"
+            android:backgroundTint="@android:color/darker_gray"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="16sp"/>
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter email address"
+            android:backgroundTint="@android:color/darker_gray"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textSize="16sp"/>
+
+        <!-- Phone Number -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Country Code -->
+            <EditText
+                android:id="@+id/country_code"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:hint="+60"
+                android:backgroundTint="@android:color/darker_gray"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="16sp"/>
+
+            <!-- Phone Number Field -->
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Phone number"
+                android:backgroundTint="@android:color/darker_gray"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <!-- Date of Birth -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date of Birth"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/date_of_birth"
+                android:layout_width="307dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:hint="Enter your birth date"
+                android:padding="10dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/calendar_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Calendar"
+                android:src="@drawable/ic_calender" />
+        </LinearLayout>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Save"
+            android:textSize="18sp"
+            android:backgroundTint="#FF5734"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+</ScrollView>

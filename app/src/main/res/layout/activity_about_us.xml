@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/backgk">
+
+    <!-- Toolbar with Back Arrow -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp">
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back Arrow"
+            android:padding="10dp"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="154dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Fixify Logo"
+        android:src="@drawable/logo3" />
+
+    <!-- About Us Description -->
+    <TextView
+        android:id="@+id/about_us_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Fixify, your go-to solution for household maintenance and repair services. Our app connects skilled technicians with customers in need of repair services for home appliances. Whether it's a minor issue or major repairs, we are here to help you get it fixed quickly and efficiently."
+        android:textSize="16sp"
+        android:lineSpacingExtra="6dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#333333" />
+
+    <!-- Mission Statement -->
+    <TextView
+        android:id="@+id/mission_statement_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Our Mission"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/mission_statement_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="At Fixify, we aim to provide a comprehensive platform where technicians can offer their services and customers can easily find trustworthy professionals. Our goal is to make home appliance repair easy, convenient, and accessible to everyone."
+        android:textSize="16sp"
+        android:lineSpacingExtra="6dp"
+        android:padding="10dp"
+        android:textColor="#333333" />
+
+    <!-- Contact Information -->
+    <TextView
+        android:id="@+id/contact_us_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/contact_us_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: support@fixify.com\nPhone: +60 12-3456789\nWebsite: www.fixify.com"
+        android:textSize="16sp"
+        android:lineSpacingExtra="6dp"
+        android:padding="10dp"
+        android:textColor="#333333" />
+</LinearLayout>

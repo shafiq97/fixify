@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Service Image -->
+    <ImageView
+        android:id="@+id/service_image"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="#DDDDDD"
+        android:scaleType="centerCrop"
+        android:src="@drawable/painting1" />
+
+    <!-- Service Title -->
+    <TextView
+        android:id="@+id/service_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Indoor Painting Service"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Service Subtitle (Distance) -->
+    <TextView
+        android:id="@+id/service_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#008000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Price Range -->
+    <TextView
+        android:id="@+id/service_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:text="RM 50.00 - RM100.00"
+        android:textColor="#FFA500"
+        android:textSize="16sp" />
+
+    <!-- Distance Text -->
+    <TextView
+        android:id="@+id/service_distance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Distance: -- km"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Details Button -->
+        <Button
+            android:id="@+id/details_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/lavender"
+            android:paddingVertical="8dp"
+            android:text="Details"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <!-- Book TimeSlot Button -->
+        <Button
+            android:id="@+id/book_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/lavender"
+            android:paddingVertical="8dp"
+            android:text="Book TimeSlot"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <!-- Feedback Button -->
+        <Button
+            android:id="@+id/feedback_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/lavender"
+            android:paddingVertical="8dp"
+            android:text="Feedback"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

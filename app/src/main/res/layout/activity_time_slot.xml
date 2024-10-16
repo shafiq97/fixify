@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgk"
+    android:padding="16dp">
+
+    <!-- Back Button and Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="-5dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick your desired time slot"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Preferred Date & Time Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preferred Date and Time"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_marginTop="50dp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Preferred Date Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/preferredDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select a date"
+            android:padding="12dp"
+            android:focusable="false"
+            android:textColor="@color/black"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:id="@+id/calendarButton1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_calender"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Select preferred date"/>
+    </LinearLayout>
+
+    <!-- Preferred Time Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/preferredTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select a time"
+            android:padding="12dp"
+            android:focusable="false"
+            android:textColor="@color/black"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:id="@+id/timeButton1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_clock"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Select preferred time"/>
+    </LinearLayout>
+
+    <!-- Alternative Date & Time Section -->
+    <TextView
+        android:id="@+id/tvAlternative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alternative Date and Time (Optional)"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:paddingTop="16dp"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Alternative Date Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/alternativeDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select a date"
+            android:padding="12dp"
+            android:focusable="false"
+            android:textColor="@color/black"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:id="@+id/calendarButton2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_calender"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Select alternative date"/>
+    </LinearLayout>
+
+    <!-- Alternative Time Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/alternativeTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select a time"
+            android:padding="12dp"
+            android:focusable="false"
+            android:textColor="@color/black"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:id="@+id/timeButton2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_clock"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Select alternative time"/>
+    </LinearLayout>
+
+    <!-- Next Button -->
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Next" />
+</LinearLayout>

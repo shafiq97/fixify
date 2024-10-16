@@ -1,0 +1,20 @@
+<resources>
+    <!-- The app name "Fixify" can be used in a different context or locale -->
+    <string name="app_name_fixify">Fixify</string>
+
+    <!-- The app name "ChatBot" -->
+    <string name="app_name">ChatBot</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="username1">Username1</string>
+    <string name="default_web_client_id">1036444010071-ogat1fh5dight24amsovol8i35n8jk4a.apps.googleusercontent.com</string>
+
+    <string-array name="rating_options">
+        <item>All</item>
+        <item>1 Star and Up</item>
+        <item>2 Stars and Up</item>
+        <item>3 Stars and Up</item>
+        <item>4 Stars and Up</item>
+        <item>5 Stars</item>
+    </string-array>
+</resources>

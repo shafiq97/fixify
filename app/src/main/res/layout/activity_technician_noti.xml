@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Title and Read All Button -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back Arrow"
+            android:padding="10dp"/>
+
+        <!-- Notifications Title -->
+        <TextView
+            android:id="@+id/notifications_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_weight="1" />
+
+        <!-- Read All Button -->
+        <TextView
+            android:id="@+id/read_all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read All"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="#808080" />
+    </LinearLayout>
+
+
+    <!-- No Notifications Message -->
+    <TextView
+        android:id="@+id/no_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Notifications"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp" />
+
+
+    <!-- Bottom Navigation -->
+</LinearLayout>
