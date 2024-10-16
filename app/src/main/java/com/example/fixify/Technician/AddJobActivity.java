@@ -53,9 +53,6 @@ public class AddJobActivity extends AppCompatActivity {
 
         // Initialize UI elements
         jobTitleInput = findViewById(R.id.job_title);
-        jobLatitudeInput = findViewById(R.id.job_latitude);
-        jobLongitudeInput = findViewById(R.id.job_longitude);
-        jobRatingInput = findViewById(R.id.job_rating);
         jobPriceRangeInput = findViewById(R.id.job_price_range);
         jobImageView = findViewById(R.id.job_image);
         chooseImageButton = findViewById(R.id.choose_image_button);
@@ -113,9 +110,9 @@ public class AddJobActivity extends AppCompatActivity {
 
     private void saveJobToFirestore(String imageUrl) {
         String jobTitle = jobTitleInput.getText().toString().trim();
-        double jobLatitude = Double.parseDouble(jobLatitudeInput.getText().toString().trim());
-        double jobLongitude = Double.parseDouble(jobLongitudeInput.getText().toString().trim());
-        float jobRating = Float.parseFloat(jobRatingInput.getText().toString().trim());
+        double jobLatitude = 0.0;
+        double jobLongitude = 0.0;
+        float jobRating = 0;
         String jobPriceRange = jobPriceRangeInput.getText().toString().trim();
         String selectedCategory = jobCategorySpinner.getSelectedItem().toString();
 
