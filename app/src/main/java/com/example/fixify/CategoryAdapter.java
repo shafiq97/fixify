@@ -1,24 +1,27 @@
 package com.example.fixify;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.fixify.Data.Category;
+
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
-    private List<String> categoryList;
-    private Context context;
+    private List<Category> categoryList;
     private OnCategoryClickListener onCategoryClickListener;
 
-    public CategoryAdapter(List<String> categoryList, Context context, OnCategoryClickListener listener) {
+    public CategoryAdapter(List<Category> categoryList, OnCategoryClickListener onCategoryClickListener) {
         this.categoryList = categoryList;
-        this.context = context;
-        this.onCategoryClickListener = listener;
+        this.onCategoryClickListener = onCategoryClickListener;
     }
 
     @NonNull
@@ -30,9 +33,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        String category = categoryList.get(position);
-        holder.categoryTextView.setText(category);
-        holder.itemView.setOnClickListener(v -> onCategoryClickListener.onCategoryClick(category));
+        Category category = categoryList.get(position);
+        holder.categoryTextView.setText(category.getName());
+
+        // Load image from the URL using Glide
+        Glide.with(holder.itemView.getContext())
+                .load(category.getImageUrl())  // Image/
+                .into(holder.categoryImageView);
+
+        holder.itemView.setOnClickListener(v -> onCategoryClickListener.onCategoryClick(category.getName()));
     }
 
     @Override
@@ -42,10 +51,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView categoryTextView;
+        ImageView categoryImageView;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTextView = itemView.findViewById(R.id.category_text);
+            categoryImageView = itemView.findViewById(R.id.category_image);  // ImageView for the category image
         }
     }
 

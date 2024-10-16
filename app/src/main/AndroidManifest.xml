@@ -128,7 +128,7 @@
             android:exported="false" /> <!-- MainActivity -->
         <activity
             android:name=".CategoryServiceActivity"
-            android:exported="false" /> <!-- MainActivity -->
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"> <!-- SelectionActivity set as Launcher -->
