@@ -135,6 +135,8 @@
         <activity
             android:name=".Technician.TechnicianBookingActivity"
             android:exported="false" />
+        <activity android:name=".FeedbackActivity"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"> <!-- SelectionActivity set as Launcher -->
